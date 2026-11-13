@@ -4,214 +4,220 @@
 :root{--navy:#102a43;--blue:#1877b8;--mint:#dff7ed;--ink:#172b3a;--muted:#65798a;--line:#dce6ec;--bg:#f3f7f9;--red:#b93838}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}header{background:var(--navy);color:white;padding:24px max(18px,calc((100% - 900px)/2));padding-bottom:20px}header h1{font-size:clamp(25px,6vw,38px);line-height:1.1;margin:0 0 7px}header p{color:#c8dae7;margin:0}.wrap{max-width:900px;margin:20px auto;padding:0 16px 48px}.tabs{display:flex;gap:8px;overflow:auto;margin-bottom:14px}.tab,button{font:inherit;cursor:pointer;border:0;border-radius:12px;font-weight:700}.tab{background:#e3ebf0;color:#31495b;padding:12px 16px;white-space:nowrap}.tab.active{background:var(--blue);color:white}.panel{display:none}.panel.active{display:block}.card{background:white;border:1px solid var(--line);border-radius:20px;padding:clamp(16px,4vw,28px);box-shadow:0 8px 24px #102a4310;margin-bottom:14px}.modehead{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.modehead h2{font-size:23px;margin:0 0 5px}.muted{color:var(--muted);margin:0}.stats{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}.stat{background:#f2f7fa;border:1px solid var(--line);border-radius:12px;padding:9px 13px;min-width:90px}.stat b{display:block;font-size:22px;color:var(--navy)}.stat small{color:var(--muted)}.progress{height:9px;background:#e8eff3;border-radius:9px;overflow:hidden;margin:12px 0 20px}.progress i{display:block;height:100%;width:0;background:#39a781;transition:width .2s}.prompt{background:#f4f8fa;border-radius:16px;padding:22px 16px;text-align:center;margin:15px 0}.prompt small{color:var(--muted);text-transform:uppercase;letter-spacing:.1em;font-weight:700}.prompt h3{font-size:clamp(24px,7vw,36px);margin:6px 0 0;overflow-wrap:anywhere}.answers{display:grid;grid-template-columns:1fr 1fr;gap:10px}.answer{background:white;border:2px solid var(--line);padding:15px 10px;min-height:58px;color:var(--ink);transition:.15s}.answer:hover:not(:disabled){border-color:var(--blue);background:#f2f9fd}.answer:disabled{cursor:not-allowed}.answer.correct{background:var(--mint);border-color:#3ca77e}.answer.wrong{background:#fff0ef;border-color:#d85a5a}.answer.reveal{box-shadow:inset 0 0 0 2px #3ca77e}.message{min-height:28px;text-align:center;font-weight:700;margin:12px 0;color:var(--muted)}.message.bad{color:var(--red)}.message.good{color:#137957}.actions{display:flex;gap:10px;flex-wrap:wrap}.primary{background:var(--blue);color:white;padding:13px 18px}.secondary{background:#eaf0f4;color:var(--navy);padding:13px 18px}.primary:disabled{opacity:.48;cursor:not-allowed}.full{width:100%}.note{font-size:13px;color:var(--muted);margin-top:14px}.list{max-height:380px;overflow:auto;margin-top:14px}.row{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid var(--line);padding:9px 4px;gap:10px}.row span:last-child{font-weight:700}.pill{font-size:12px;background:#e9f2f7;padding:4px 8px;border-radius:99px;color:#37566d}.shake{animation:shake .22s linear 3}@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}@media(max-width:520px){.answers{grid-template-columns:1fr}.answer{min-height:52px}.wrap{margin-top:13px}.modehead{display:block}}
 </style></head><body>
 <header><h1>Top 200 Pharmacy Drugs Game</h1><p>Practice generic ↔ brand recall, one quick match at a time.</p></header><main class="wrap">
-<nav class="tabs" aria-label="Game modes"><button class="tab active" data-tab="minute">⚡ 1-minute challenge</button><button class="tab" data-tab="marathon">🏁 Match all 200</button><button class="tab" data-tab="study">📚 Study list</button></nav>
-<section id="minute" class="panel active"><div class="card"><div class="modehead"><div><h2>How many can you match?</h2><p class="muted">Match each name before the 60-second timer runs out.</p></div><span class="pill">60 seconds</span></div><div class="stats"><div class="stat"><b id="mScore">0</b><small>correct</small></div><div class="stat"><b id="mTime">1:00</b><small>time left</small></div><div class="stat"><b id="mStreak">0</b><small>best streak</small></div></div><div class="progress"><i id="mBar"></i></div><div id="mPrompt" class="prompt"><small>Tap start to begin</small><h3>Ready?</h3></div><div id="mAnswers" class="answers"></div><div id="mMsg" class="message" aria-live="polite">A wrong answer adds a one-second stun.</div><button id="mStart" class="primary full">Start 1-minute game</button><p class="note">Questions alternate between generic → brand and brand → generic. All 200 pairs are included.</p></div></section>
-<section id="marathon" class="panel"><div class="card"><div class="modehead"><div><h2>Can you match all 200?</h2><p class="muted">Work through every pair. The clock stops when you finish.</p></div><span class="pill">200 matches</span></div><div class="stats"><div class="stat"><b id="aProgress">0 / 200</b><small>matched</small></div><div class="stat"><b id="aTime">0:00</b><small>elapsed</small></div><div class="stat"><b id="aMiss">0</b><small>misses</small></div></div><div class="progress"><i id="aBar"></i></div><div id="aPrompt" class="prompt"><small>Full-list challenge</small><h3>Ready?</h3></div><div id="aAnswers" class="answers"></div><div id="aMsg" class="message" aria-live="polite">Misses trigger a one-second stun, then retry the same match.</div><button id="aStart" class="primary full">Start all-200 challenge</button><p class="note">Randomized order; every drug appears once. You can restart at any time.</p></div></section>
+<nav class="tabs" aria-label="Game modes"><button class="tab active" data-tab="minute">⚡ 1-minute challenge</button><button class="tab" data-tab="marathon">🏁 Match all listed drugs</button><button class="tab" data-tab="study">📚 Study list</button></nav>
+<section id="minute" class="panel active"><div class="card"><div class="modehead"><div><h2>How many can you match?</h2><p class="muted">Match each name before the 60-second timer runs out.</p></div><span class="pill">60 seconds</span></div><div class="stats"><div class="stat"><b id="mScore">0</b><small>correct</small></div><div class="stat"><b id="mTime">1:00</b><small>time left</small></div><div class="stat"><b id="mStreak">0</b><small>best streak</small></div></div><div class="progress"><i id="mBar"></i></div><div id="mPrompt" class="prompt"><small>Tap start to begin</small><h3>Ready?</h3></div><div id="mAnswers" class="answers"></div><div id="mMsg" class="message" aria-live="polite">Wrong answers cause a one-second stun.</div><button id="mStart" class="primary full">Start 1-minute game</button><p class="note">Questions alternate between generic → brand and brand → generic. All listed pairs are included.</p></div></section>
+<section id="marathon" class="panel"><div class="card"><div class="modehead"><div><h2>Can you match all 200?</h2><p class="muted">Work through every pair. The clock stops when you finish.</p></div><span class="pill">All matches</span></div><div class="stats"><div class="stat"><b id="aProgress">0 / 200</b><small>matched</small></div><div class="stat"><b id="aTime">0:00</b><small>elapsed</small></div><div class="stat"><b id="aMiss">0</b><small>misses</small></div></div><div class="progress"><i id="aBar"></i></div><div id="aPrompt" class="prompt"><small>Full-list challenge</small><h3>Ready?</h3></div><div id="aAnswers" class="answers"></div><div id="aMsg" class="message" aria-live="polite">Misses trigger a one-second stun, then retry the same match.</div><button id="aStart" class="primary full">Start full-list challenge</button><p class="note">Randomized order; every drug appears once. You can restart at any time.</p></div></section>
 <section id="study" class="panel"><div class="card"><h2>Study the pairs</h2><p class="muted">An example brand is shown for each generic. Brand availability and preferred study lists vary.</p><div class="stats"><div class="stat"><b id="count">200</b><small>drug pairs</small></div></div><input id="search" aria-label="Search list" placeholder="Search generic or brand…" style="width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font:inherit"><div class="list" id="list"></div><p class="note">This is a study aid, not a prescribing reference. Some drugs have multiple brand names or formulations.</p></div></section>
 </main>
 <script>
-// Broad U.S. Top-200 study set. Each line is generic|brand example.
-const raw=`atorvastatin|Lipitor
-metformin|Glucophage
-levothyroxine|Synthroid
-amlodipine|Norvasc
-lisinopril|Zestril
-albuterol|Ventolin HFA
-losartan|Cozaar
-metoprolol|Lopressor / Toprol-XL
-rosuvastatin|Crestor
-omeprazole|Prilosec
-gabapentin|Neurontin
-sertraline|Zoloft
-escitalopram|Lexapro
-semaglutide|Ozempic / Wegovy
-amphetamine / dextroamphetamine|Adderall
-pantoprazole|Protonix
-bupropion|Wellbutrin XL
-hydrochlorothiazide|Microzide
-fluoxetine|Prozac
-trazodone|Desyrel
-montelukast|Singulair
-amoxicillin|Amoxil
-tamsulosin|Flomax
-apixaban|Eliquis
-insulin glargine|Lantus
-simvastatin|Zocor
-empagliflozin|Jardiance
-furosemide|Lasix
-meloxicam|Mobic
-hydrocodone / acetaminophen|Norco
-tirzepatide|Mounjaro / Zepbound
-fluticasone (nasal)|Flonase
-methylphenidate|Ritalin / Concerta
-duloxetine|Cymbalta
-prednisone|Deltasone
-carvedilol|Coreg
-famotidine|Pepcid
-ibuprofen|Motrin / Advil
-buspirone|BuSpar
-venlafaxine|Effexor XR
-tramadol|Ultram
-potassium chloride|Klor-Con
-allopurinol|Zyloprim
-hydroxyzine|Vistaril / Atarax
-clopidogrel|Plavix
-ergocalciferol (vitamin D2)|Drisdol
-cetirizine|Zyrtec
-ondansetron|Zofran
-cyclobenzaprine|Flexeril
-spironolactone|Aldactone
-oxycodone|OxyContin / Roxicodone
-glipizide|Glucotrol
-aspirin|Bayer / Ecotrin
-zolpidem|Ambien
-lamotrigine|Lamictal
-alprazolam|Xanax
-citalopram|Celexa
-pregabalin|Lyrica
-clonazepam|Klonopin
-azithromycin|Zithromax
-pravastatin|Pravachol
-valsartan|Diovan
-ezetimibe|Zetia
-insulin lispro|Humalog
-ethinyl estradiol / norethindrone|Lo Loestrin Fe
-propranolol|Inderal
-latanoprost|Xalatan
-lisdexamfetamine|Vyvanse
-atenolol|Tenormin
-doxycycline|Vibramycin
-amoxicillin / clavulanate|Augmentin
-estradiol|Estrace
-dulaglutide|Trulicity
-lisinopril / hydrochlorothiazide|Zestoretic
-fluticasone / salmeterol|Advair Diskus
-lorazepam|Ativan
-insulin aspart|NovoLog
-celecoxib|Celebrex
-finasteride|Proscar
-quetiapine|Seroquel
-clonidine|Catapres
-aripiprazole|Abilify
-cephalexin|Keflex
-alendronate|Fosamax
-topiramate|Topamax
-tizanidine|Zanaflex
-dapagliflozin|Farxiga
-oxycodone / acetaminophen|Percocet
-testosterone|AndroGel
-losartan / hydrochlorothiazide|Hyzaar
-olmesartan|Benicar
-amitriptyline|Elavil
-folic acid|Folvite
-rivaroxaban|Xarelto
-fenofibrate|Tricor
-triamcinolone (topical)|Kenalog
-paroxetine|Paxil
-ferrous sulfate|Feosol
-budesonide / formoterol|Symbicort
-loratadine|Claritin
-valacyclovir|Valtrex
-warfarin|Coumadin / Jantoven
-ethinyl estradiol / norgestimate|Ortho Tri-Cyclen
-fluticasone / umeclidinium / vilanterol|Trelegy Ellipta
-methocarbamol|Robaxin
-acetaminophen|Tylenol
-diltiazem|Cardizem
-desiccated thyroid|Armour Thyroid
-baclofen|Lioresal
-diclofenac|Voltaren
-naproxen|Naprosyn / Aleve
-sumatriptan|Imitrex
-esomeprazole|Nexium
-mirtazapine|Remeron
-levetiracetam|Keppra
-norethindrone|Micronor
-tadalafil|Cialis
-nifedipine|Procardia XL
-progesterone|Prometrium
-insulin degludec|Tresiba
-cyanocobalamin (vitamin B12)|Nascobal
-hydralazine|Apresoline
-adalimumab|Humira
-sitagliptin|Januvia
-glimepiride|Amaryl
-chlorthalidone|Thalitone
-oxybutynin|Ditropan XL
-pioglitazone|Actos
-ketoconazole (topical)|Nizoral
-irbesartan|Avapro
-azelastine (nasal)|Astelin / Astepro
-hydroxychloroquine|Plaquenil
-nitrofurantoin|Macrobid
-sulfamethoxazole / trimethoprim|Bactrim
-benzonatate|Tessalon
-isosorbide mononitrate|Imdur
-prednisolone (eye drops)|Pred Forte
-diclofenac (topical)|Voltaren Arthritis Pain
-methylprednisolone|Medrol
-triamterene / hydrochlorothiazide|Maxzide / Dyazide
-levocetirizine|Xyzal
-fluticasone (inhaled)|Flovent HFA
-atomoxetine|Strattera
-dexmethylphenidate|Focalin
-methotrexate|Trexall
-donepezil|Aricept
-desvenlafaxine|Pristiq
-ropinirole|Requip
-clobetasol (topical)|Temovate
-fluticasone / vilanterol|Breo Ellipta
-ipratropium / albuterol|Combivent Respimat
-phentermine|Adipex-P
-mupirocin (topical)|Bactroban
-verapamil|Verelan
-estradiol (topical / vaginal)|Divigel
-etonogestrel / ethinyl estradiol|NuvaRing
-olanzapine|Zyprexa
-prazosin|Minipress
-sildenafil|Viagra
-ethinyl estradiol / levonorgestrel|Seasonique
-evolocumab|Repatha
-mesalamine|Lialda / Pentasa
-memantine|Namenda
-diazepam|Valium
-lithium|Lithobid
-nortriptyline|Pamelor
-timolol (eye drops)|Timoptic
-cefdinir|Omnicef
-meclizine|Antivert
-cyclosporine (eye drops)|Restasis
-tretinoin (topical)|Retin-A
-magnesium oxide|Mag-Ox
-fluconazole|Diflucan
-rimegepant|Nurtec ODT
-lovastatin|Mevacor
-tiotropium|Spiriva
-docusate|Colace
-temazepam|Restoril
-benazepril|Lotensin
-brimonidine (eye drops)|Alphagan P
-nirmatrelvir / ritonavir|Paxlovid
-ofloxacin (eye drops)|Ocuflox
-sacubitril / valsartan|Entresto
-divalproex sodium|Depakote
-nebivolol|Bystolic
-acyclovir|Zovirax
-morphine|MS Contin
-doxazosin|Cardura
-amlodipine / benazepril|Lotrel
-ciprofloxacin|Cipro
-emtricitabine / tenofovir|Truvada
-budesonide|Pulmicort
-dupilumab|Dupixent
-enalapril|Vasotec
-anastrozole|Arimidex
-torsemide|Demadex
-polyethylene glycol 3350|MiraLAX
-nitroglycerin|Nitrostat
-flecainide|Tambocor
-liothyronine|Cytomel`;
+// Generic-brand pairs transcribed from the linked PTCB Test Prep 2026–2027 list.
+const raw=`Amiodarone|Pacerone
+Amlodipine|Norvasc
+Apixaban|Eliquis
+Aspirin|Bayer
+Atenolol|Tenormin
+Atorvastatin|Lipitor
+Carvedilol|Coreg
+Chlorthalidone|Thalitone
+Clonidine|Catapres
+Clopidogrel|Plavix
+Digoxin|Lanoxin
+Diltiazem|Cardizem CD
+Enoxaparin|Lovenox
+Evolocumab|Repatha
+Ezetimibe|Zetia
+Fenofibrate|Tricor
+Furosemide|Lasix
+Heparin|Heparin
+Hydralazine|Hydralazine
+Hydrochlorothiazide|Microzide
+Isosorbide mononitrate|Isosorbide mononitrate
+Lisinopril|Zestril
+Lisinopril/hydrochlorothiazide|Zestoretic
+Losartan|Cozaar
+Losartan/hydrochlorothiazide|Hyzaar
+Metoprolol succinate|Toprol-XL
+Metoprolol tartrate|Lopressor
+Nifedipine|Procardia XL
+Nitroglycerin|Nitrostat
+Olmesartan|Benicar
+Potassium chloride|Klor-Con
+Propranolol|Inderal LA
+Rivaroxaban|Xarelto
+Rosuvastatin|Crestor
+Sacubitril/valsartan|Entresto
+Simvastatin|Zocor
+Spironolactone|Aldactone
+Valsartan|Diovan
+Verapamil|Verelan
+Warfarin|Jantoven
+Alendronate|Fosamax
+Allopurinol|Zyloprim
+Colchicine|Colcrys
+Cyanocobalamin|Nascobal
+Dapagliflozin|Farxiga
+Denosumab|Prolia
+Dulaglutide|Trulicity
+Empagliflozin|Jardiance
+Ferrous sulfate|Feosol
+Glimepiride|Amaryl
+Glipizide|Glucotrol XL
+Insulin aspart|NovoLog
+Insulin degludec|Tresiba
+Insulin glargine|Lantus
+Insulin lispro|Humalog
+Levothyroxine|Synthroid
+Metformin|Metformin
+NPH insulin|Humulin N
+Pioglitazone|Actos
+Regular insulin|Humulin R
+Semaglutide|Ozempic
+Sitagliptin|Januvia
+Testosterone|AndroGel
+Tirzepatide|Mounjaro
+Alprazolam|Xanax
+Amitriptyline|Amitriptyline
+Aripiprazole|Abilify
+Atomoxetine|Strattera
+Bupropion|Wellbutrin XL
+Buspirone|Buspirone
+Carbamazepine|Tegretol
+Carbidopa/levodopa|Sinemet
+Citalopram|Celexa
+Clonazepam|Klonopin
+Clozapine|Clozaril
+Divalproex sodium|Depakote
+Donepezil|Aricept
+Duloxetine|Cymbalta
+Escitalopram|Lexapro
+Fluoxetine|Prozac
+Gabapentin|Neurontin
+Lamotrigine|Lamictal
+Levetiracetam|Keppra
+Lisdexamfetamine|Vyvanse
+Lithium|Lithobid
+Lorazepam|Ativan
+Memantine|Namenda
+Methylphenidate|Ritalin
+Mixed amphetamine salts|Adderall
+Olanzapine|Zyprexa
+Paroxetine|Paxil
+Phenytoin|Dilantin
+Pregabalin|Lyrica
+Quetiapine|Seroquel
+Rimegepant|Nurtec ODT
+Risperidone|Risperdal
+Sertraline|Zoloft
+Sumatriptan|Imitrex
+Topiramate|Topamax
+Trazodone|Trazodone
+Venlafaxine|Effexor XR
+Zolpidem|Ambien
+Acetaminophen|Tylenol
+Baclofen|Baclofen
+Celecoxib|Celebrex
+Cyclobenzaprine|Cyclobenzaprine
+Diclofenac|Voltaren
+Fentanyl|Duragesic
+Hydrocodone/acetaminophen|Norco
+Ibuprofen|Advil
+Ketorolac|Toradol
+Meloxicam|Mobic
+Methadone|Methadose
+Methocarbamol|Robaxin
+Morphine|MS Contin
+Naloxone|Narcan
+Naproxen|Aleve
+Oxycodone|OxyContin
+Oxycodone/acetaminophen|Percocet
+Tramadol|Ultram
+Acyclovir|Zovirax
+Amoxicillin|Amoxil
+Amoxicillin/clavulanate|Augmentin
+Azithromycin|Zithromax
+Cefdinir|Cefdinir
+Ceftriaxone|Rocephin
+Cephalexin|Keflex
+Ciprofloxacin|Cipro
+Clindamycin|Cleocin
+Doxycycline|Doryx
+Emtricitabine/tenofovir|Truvada
+Fluconazole|Diflucan
+Levofloxacin|Levofloxacin
+Metronidazole|Flagyl
+Mupirocin|Bactroban
+Nirmatrelvir/ritonavir|Paxlovid
+Nitrofurantoin|Macrobid
+Nystatin|Nystatin
+Oseltamivir|Tamiflu
+Penicillin V potassium|Pen-Vee K
+Piperacillin/tazobactam|Zosyn
+Sulfamethoxazole/trimethoprim|Bactrim DS
+Valacyclovir|Valtrex
+Vancomycin|Vancocin
+Albuterol|Ventolin HFA
+Albuterol/ipratropium|DuoNeb
+Benzonatate|Tessalon
+Budesonide/formoterol|Symbicort
+Cetirizine|Zyrtec
+Dupilumab|Dupixent
+Epinephrine|EpiPen
+Fluticasone nasal|Flonase
+Fluticasone/salmeterol|Advair Diskus
+Fluticasone/umeclidinium/vilanterol|Trelegy Ellipta
+Hydroxyzine|Vistaril
+Loratadine|Claritin
+Methylprednisolone|Medrol
+Montelukast|Singulair
+Prednisolone|Orapred
+Prednisone|Rayos; generic
+Tiotropium|Spiriva
+Dicyclomine|Bentyl
+Docusate|Colace
+Esomeprazole|Nexium
+Famotidine|Pepcid
+Lansoprazole|Prevacid
+Linaclotide|Linzess
+Loperamide|Imodium A-D
+Mesalamine|Lialda
+Metoclopramide|Reglan
+Omeprazole|Prilosec
+Ondansetron|Zofran
+Pantoprazole|Protonix
+Polyethylene glycol 3350|MiraLAX
+Promethazine|Phenergan
+Senna|Senokot
+Estradiol|Estrace
+Ethinyl estradiol/etonogestrel|NuvaRing
+Ethinyl estradiol/norethindrone|Junel Fe
+Ethinyl estradiol/norgestimate|Tri-Sprintec
+Finasteride|Proscar
+Mirabegron|Myrbetriq
+Norethindrone|Camila
+Norgestrel|Opill
+Oxybutynin|Ditropan XL
+Sildenafil|Viagra
+Tadalafil|Cialis
+Tamsulosin|Flomax
+Adalimumab|Humira
+Brimonidine|Alphagan P
+Clobetasol|Temovate
+Cyclosporine|Restasis; Neoral
+Hydroxychloroquine|Plaquenil
+Latanoprost|Xalatan
+Meclizine|Antivert
+Methotrexate|Otrexup
+Tacrolimus|Prograf
+Timolol ophthalmic|Timoptic
+Tretinoin|Retin-A
+Triamcinolone|Kenalog`;
 const drugs=raw.trim().split('\n').map((line,i)=>{const [generic,brand]=line.split('|');return {generic,brand,rank:i+1}});
+const totalDrugs=drugs.length;
+document.querySelector('#count').textContent=totalDrugs;
+document.querySelector('#aProgress').textContent=`0 / ${totalDrugs}`;
+document.querySelectorAll('#marathon .pill')[0].textContent=`${totalDrugs} matches`;
+document.querySelector('#marathon h2').textContent=`Can you match all ${totalDrugs}?`;
+document.querySelector('#marathon .note').textContent=`Randomized order; every one of the ${totalDrugs} drugs appears once. You can restart at any time.`;
 const $=s=>document.querySelector(s);const shuffle=a=>{const b=[...a];for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
 $('.tabs').addEventListener('click',e=>{const b=e.target.closest('[data-tab]');if(!b)return;document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===b));document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.id===b.dataset.tab))});
 function fmt(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
@@ -221,9 +227,9 @@ function mQuestion(){if(!m.on)return; m.current=drugs[Math.floor(Math.random()*d
 function mAnswer(btn,forward){if(!m.on||m.lock)return;const right=drugs[+btn.dataset.g]===m.current;if(right){btn.classList.add('correct');m.score++;m.streak++;m.best=Math.max(m.best,m.streak);$('#mMsg').textContent='Correct!';$('#mMsg').className='message good';mUpdate();setTimeout(mQuestion,260)}else{btn.classList.add('wrong');m.streak=0;m.lock=true;$('#mAnswers').querySelectorAll('button').forEach(b=>{b.disabled=true;if(drugs[+b.dataset.g]===m.current)b.classList.add('reveal')});$('#mMsg').textContent=`Not quite — ${forward?m.current.brand:m.current.generic}. Stunned for 1 second.`;$('#mMsg').className='message bad';$('#mPrompt').classList.add('shake');setTimeout(()=>{$('#mPrompt').classList.remove('shake');m.lock=false;if(m.on)mQuestion()},1000);mUpdate()}}
 function mUpdate(){$('#mScore').textContent=m.score;$('#mStreak').textContent=m.best;$('#mTime').textContent=fmt(m.time);$('#mBar').style.width=`${(m.time/60)*100}%`}
 $('#mStart').onclick=()=>{clearInterval(m.timer);m={on:true,score:0,streak:0,best:0,time:60,lock:false,timer:null,current:null};$('#mStart').disabled=true;$('#mStart').textContent='Game in progress…';$('#mMsg').textContent='Go!';mUpdate();mQuestion();m.timer=setInterval(()=>{if(m.lock)return;m.time--;mUpdate();if(m.time<=0){m.on=false;clearInterval(m.timer);$('#mAnswers').innerHTML='';$('#mPrompt').innerHTML='<small>Time</small><h3>Nice run!</h3>';$('#mMsg').textContent=`You matched ${m.score} correctly. Play again to beat your score.`;$('#mMsg').className='message good';$('#mStart').disabled=false;$('#mStart').textContent='Play again'}},1000)};
-let a={on:false,queue:[],index:0,miss:0,sec:0,lock:false,timer:null,forward:true};function aShow(){if(!a.on)return;if(a.index>=a.queue.length){a.on=false;clearInterval(a.timer);$('#aAnswers').innerHTML='';$('#aPrompt').innerHTML='<small>Challenge complete</small><h3>All 200 matched 🎉</h3>';$('#aMsg').textContent=`Finished in ${fmt(a.sec)} with ${a.miss} ${a.miss===1?'miss':'misses'}.`;$('#aMsg').className='message good';$('#aStart').disabled=false;$('#aStart').textContent='Play again';aUpdate();return}const d=a.queue[a.index];a.forward=Math.random()<.5;$('#aPrompt').innerHTML=`<small>Match the ${a.forward?'brand name':'generic name'} · ${a.index+1} of 200</small><h3>${a.forward?d.generic:d.brand}</h3>`;const choices=optionSet(d);$('#aAnswers').innerHTML=choices.map(x=>`<button class="answer" data-g="${drugs.indexOf(x)}">${a.forward?x.brand:x.generic}</button>`).join('');$('#aAnswers').querySelectorAll('button').forEach(b=>b.onclick=()=>aAnswer(b,d));}
+let a={on:false,queue:[],index:0,miss:0,sec:0,lock:false,timer:null,forward:true};function aShow(){if(!a.on)return;if(a.index>=a.queue.length){a.on=false;clearInterval(a.timer);$('#aAnswers').innerHTML='';$('#aPrompt').innerHTML='<small>Challenge complete</small><h3>All matches complete 🎉</h3>';$('#aMsg').textContent=`Finished in ${fmt(a.sec)} with ${a.miss} ${a.miss===1?'miss':'misses'}.`;$('#aMsg').className='message good';$('#aStart').disabled=false;$('#aStart').textContent='Play again';aUpdate();return}const d=a.queue[a.index];a.forward=Math.random()<.5;$('#aPrompt').innerHTML=`<small>Match the ${a.forward?'brand name':'generic name'} · ${a.index+1} of ${totalDrugs}</small><h3>${a.forward?d.generic:d.brand}</h3>`;const choices=optionSet(d);$('#aAnswers').innerHTML=choices.map(x=>`<button class="answer" data-g="${drugs.indexOf(x)}">${a.forward?x.brand:x.generic}</button>`).join('');$('#aAnswers').querySelectorAll('button').forEach(b=>b.onclick=()=>aAnswer(b,d));}
 function aAnswer(btn,d){if(!a.on||a.lock)return;if(drugs[+btn.dataset.g]===d){btn.classList.add('correct');a.index++;aUpdate();setTimeout(aShow,240)}else{a.miss++;a.lock=true;btn.classList.add('wrong');$('#aAnswers').querySelectorAll('button').forEach(b=>{b.disabled=true;if(drugs[+b.dataset.g]===d)b.classList.add('reveal')});$('#aMsg').textContent=`Not quite — ${a.forward?d.brand:d.generic}. Stunned for 1 second; try again.`;$('#aMsg').className='message bad';$('#aPrompt').classList.add('shake');aUpdate();setTimeout(()=>{$('#aPrompt').classList.remove('shake');a.lock=false;if(a.on)aShow()},1000)}}
-function aUpdate(){$('#aProgress').textContent=`${a.index} / 200`; $('#aTime').textContent=fmt(a.sec);$('#aMiss').textContent=a.miss;$('#aBar').style.width=`${a.index/2}%`}
+function aUpdate(){$('#aProgress').textContent=`${a.index} / ${totalDrugs}`; $('#aTime').textContent=fmt(a.sec);$('#aMiss').textContent=a.miss;$('#aBar').style.width=`${a.index/totalDrugs*100}%`}
 $('#aStart').onclick=()=>{clearInterval(a.timer);a={on:true,queue:shuffle(drugs),index:0,miss:0,sec:0,lock:false,timer:null,forward:true};$('#aStart').disabled=true;$('#aStart').textContent='Challenge in progress…';$('#aMsg').textContent='Every pair is in the shuffled queue. You can do it!';$('#aMsg').className='message';aUpdate();aShow();a.timer=setInterval(()=>{a.sec++;$('#aTime').textContent=fmt(a.sec)},1000)};
 function drawList(q=''){const filtered=drugs.filter(d=>(d.generic+' '+d.brand).toLowerCase().includes(q.toLowerCase()));$('#count').textContent=filtered.length;$('#list').innerHTML=filtered.map(d=>`<div class="row"><span>${d.rank}. ${d.generic}</span><span>${d.brand}</span></div>`).join('')||'<p class="muted">No matches.</p>'}$('#search').addEventListener('input',e=>drawList(e.target.value));drawList();
 </script></body></html>
